@@ -7,6 +7,8 @@ class Player{
     private $level = 1;
     private $care;
 
+    private static $counter = 0;
+
     public function __construct( $username, $team, $vehicle, $level )
     {
         $this->username = $username;
@@ -18,6 +20,8 @@ class Player{
         }
 
         $this->care = mt_rand( 0, 5 );
+
+        self::$counter++;
     }
 
     public function drive()
@@ -51,5 +55,10 @@ class Player{
         $performance += round( $this->level / 10 );
 
         return $performance;
+    }
+
+    public static function getCounter()
+    {
+        return self::$counter;
     }
 }

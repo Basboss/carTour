@@ -1,18 +1,30 @@
 <?php
 class Vehicle{
-    // Vitesse max
+    const MAX_SPEED = 350;
+    const MAX_STATE = 100;
+    const POWER = array(
+        'LOW' => 1,
+        'MEDIUM' => 2,
+        'HIGH' => 3,
+        'SUPER' => 4,
+        'FURIUS' => 5,
+    );
     
     private $model;
     private $power;
 
     private $engine = false;
-    private $state = 100;
+    private $state = self::MAX_STATE;
     private $speed = 0;
 
     public function __construct( $model, $power )
     {
         $this->model = $model;
-        $this->power = $power;
+        if( in_array( $power, self::POWER ) ){
+            $this->power = $power;
+        }else{
+            $this->power = self::POWER['LOW'];
+        }
     }
 
     public function start()
@@ -28,8 +40,8 @@ class Vehicle{
     public function increaseSpeed()
     {
         $this->speed += $this->power * 10;
-        if( $this->speed >= 350 ){
-            $this->speed = 350;
+        if( $this->speed >= self::MAX_SPEED ){
+            $this->speed = self::MAX_SPEED;
         }
 
         return $this->speed;
@@ -59,7 +71,7 @@ class Vehicle{
 
     public function repair()
     {
-        $this->state = 100;
+        $this->state = self::MAX_STATE;
     }
 
     public function stop()
@@ -72,7 +84,6 @@ class Vehicle{
         return $this->speed;
     }
 }
-
 
 
 

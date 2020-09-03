@@ -1,6 +1,14 @@
 <?php
 class Race{
-    // Nombre de joueur minimum
+    const MIN_DISTANCE = 100;
+    const WEATHER = array(
+        'SUNNY' => 1,
+        'FOGGY' => 2,
+        'RAINY' => 3,
+    );
+    const TYPE_ROAD = 'road';
+    const TYPE_DIRT = 'dirt';
+    const TYPE_SNOW = 'snow';
 
     private $track;
     private $type;
@@ -8,9 +16,7 @@ class Race{
     private $lap = 5;
     private $weather;
 
-    private static $players = array();
-        const MAX_PLAYERS = 2;
-    
+    private $players = array();
     private $ranking = array();
 
     public function __construct( $track, $type, $distance, $weather, $lap = null )
@@ -19,10 +25,10 @@ class Race{
         $this->type = $type;
         $this->weather = $weather;
         
-        if( is_int( $distance ) && $distance > 100 ){
+        if( is_int( $distance ) && $distance > self::MIN_DISTANCE ){
             $this->distance = $distance;
         }else{
-            $this->distance = 100;
+            $this->distance = self::MIN_DISTANCE;
         }
 
         if( is_int( $lap ) && $lap > 0 ){
@@ -44,6 +50,7 @@ class Race{
 
     public function getRanking()
     {
+        ksort( $this->ranking );
         return $this->ranking;
     }
 
@@ -65,11 +72,51 @@ class Race{
         }
     }
 
-    public static function getPlayers() {
-        return self::$players;
+    public function countPlayers()
+    {
+        return count( $this->players );
     }
-    
+
+    public function getTrack()
+    {
+        return $this->track;
+    }
+
+    public static function generate()
+    {
+        $tracks = array(
+            array(
+                'name' => 'Monza',
+                'type' => self::TYPE_ROAD,
+                'distance' => 1200,
+            ),
+            array(
+                'name' => 'SPA',
+                'type' => self::TYPE_ROAD,
+                'distance' => 2400,
+            ),
+            array(
+                'name' => 'Tigne Challenge',
+                'type' => self::TYPE_SNOW,
+                'distance' => 1200,
+            ),
+            array(
+                'name' => 'Citadelle Trophy',
+                'type' => self::TYPE_DIRT,
+                'distance' => 1200,
+            ),
+        );
+
+        $trackKey = array_rand( $tracks );
+        $track = $tracks[ $trackKey ];
+
+        $weather = array_rand( self::WEATHER );
+        return new Race( 
+            $track['name'], 
+            $track['type'], 
+            $track['distance'], 
+            self::WEATHER[ $weather ],
+            rand( 5, 15 )
+        );
+    }
 }
-echo Player::$count();
-// $player = new Player( $username, $team, $vehicle, $level);
-// echo Player::$count();
