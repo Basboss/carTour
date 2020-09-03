@@ -71,5 +71,5 @@ class Race{
     
 }
 echo Player::$count();
-$player = new Player( $username, $team, $vehicle, $level);
-echo Player::$count();
+// $player = new Player( $username, $team, $vehicle, $level);
+// echo Player::$count();
