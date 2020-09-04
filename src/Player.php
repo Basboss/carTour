@@ -1,5 +1,5 @@
 <?php
-class Player{
+final class Player{
     private $username;
     private $team;
     private $vehicle;
@@ -36,6 +36,7 @@ class Player{
             }
         }else{
             $this->vehicle->start();
+            $this->vehicle->bonus();
             $this->vehicle->increaseSpeed();
         }
 
@@ -61,4 +62,5 @@ class Player{
     {
         return self::$counter;
     }
+
 }

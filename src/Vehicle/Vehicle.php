@@ -1,5 +1,5 @@
 <?php
-class Vehicle{
+abstract class Vehicle{
     const MAX_SPEED = 350;
     const MAX_STATE = 100;
     const POWER = array(
@@ -11,11 +11,11 @@ class Vehicle{
     );
     
     private $model;
-    private $power;
+    protected $power;
 
     private $engine = false;
     private $state = self::MAX_STATE;
-    private $speed = 0;
+    protected $speed = 0;
 
     public function __construct( $model, $power )
     {
@@ -57,7 +57,7 @@ class Vehicle{
         return $this->speed;
     }
 
-    public function setDamage( $damage )
+    final public function setDamage( $damage )
     {
         $this->state -= $damage;
 
@@ -83,6 +83,8 @@ class Vehicle{
     {
         return $this->speed;
     }
+
+    abstract public function bonus();
 }
 
 

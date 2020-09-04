@@ -1,21 +1,28 @@
 <?php
-require_once 'Race.php';
-require_once 'Player.php';
-require_once 'Vehicle.php';
+require_once 'src/Race.php';
+require_once 'src/Player.php';
+require_once 'src/Vehicle/Vehicle.php';
+require_once 'src/Vehicle/Car.php';
+require_once 'src/Vehicle/Truck.php';
+require_once 'src/Vehicle/Motorcycle.php';
 
-$ford = new Vehicle( 'Ford Mustang', Vehicle::POWER['SUPER'] );
+$ford = new Car( 'Ford Mustang', Vehicle::POWER['SUPER'] );
 $jeanPaul = new Player( 'Jean-Paul', 'Dream Team Tunning', $ford, 24 );
 
-$tesla = new Vehicle( 'Tesla Model X', Vehicle::POWER['HIGH'] );
+$tesla = new Car( 'Tesla Model X', Vehicle::POWER['HIGH'] );
 $jeanJacques = new Player( 'Jean-Jacques', 'RC Tunning 59', $tesla, 75 );
 
-$gsxr = new Vehicle( 'GSXR', Vehicle::POWER['FURIUS'] );
+$gsxr = new Motorcycle( 'GSXR', Vehicle::POWER['FURIUS'] );
 $jeanPierre = new Player( 'Jean-Pierre', 'RC Tunning 59', $gsxr, 35 );
+
+$scania = new Truck( 'Scania R', Vehicle::POWER['LOW'] );
+$jeanMarc = new Player( 'Jean-Marc', 'Truck Racing', $scania, 90 );
 
 $monza = new Race( 'Monza', Race::TYPE_SNOW, 1200, Race::WEATHER['SUNNY'] );
 $monza->addPlayer( $jeanPaul );
 $monza->addPlayer( $jeanJacques );
 $monza->addPlayer( $jeanPierre );
+$monza->addPlayer( $jeanMarc );
 
 $monza->start();
 
@@ -24,6 +31,8 @@ $randomRace->addPlayer( $jeanJacques );
 $randomRace->addPlayer( $jeanPierre );
 $randomRace->start();
 ?>
+
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
