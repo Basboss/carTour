@@ -1,10 +1,16 @@
 <?php
-require_once 'src/Race.php';
-require_once 'src/Player.php';
-require_once 'src/Vehicle/Vehicle.php';
-require_once 'src/Vehicle/Car.php';
-require_once 'src/Vehicle/Truck.php';
-require_once 'src/Vehicle/Motorcycle.php';
+
+require_once 'src/Autoloader.php';
+
+use Game\Autoloader;
+use Game\Player;
+use Game\Race;
+use Game\Vehicle\Car;
+use Game\Vehicle\Truck;
+use Game\Vehicle\Vehicle;
+use Game\Vehicle\Motorcycle;
+
+Autoloader::register();
 
 $ford = new Car( 'Ford Mustang', Vehicle::POWER['SUPER'] );
 $jeanPaul = new Player( 'Jean-Paul', 'Dream Team Tunning', $ford, 24 );

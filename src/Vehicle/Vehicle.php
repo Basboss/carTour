@@ -1,4 +1,7 @@
 <?php
+
+namespace Game\Vehicle;
+
 abstract class Vehicle{
     const MAX_SPEED = 350;
     const MAX_STATE = 100;

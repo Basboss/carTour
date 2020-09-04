@@ -1,4 +1,7 @@
 <?php
+
+namespace Game;
+
 class Race{
     const MIN_DISTANCE = 100;
     const WEATHER = array(

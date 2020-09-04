@@ -1,4 +1,7 @@
 <?php
+
+namespace Game;
+
 final class Player{
     private $username;
     private $team;
