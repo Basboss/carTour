@@ -1,10 +1,13 @@
 <?php
 namespace Game;
 
+use Game\Vehicle\Vehicle;
+
 final class Player{
     private $username;
     private $team;
     private $vehicle;
+    private $uid;
 
     private $level = 1;
     private $care;
@@ -22,6 +25,7 @@ final class Player{
         }
 
         $this->care = mt_rand( 0, 5 );
+        $this->uid = $this->generateUid();
 
         self::$counter++;
     }
@@ -60,8 +64,51 @@ final class Player{
         return $performance;
     }
 
+    public function __sleep()
+    {
+        return array('username', 'team', 'level', 'care');
+    }
+
+    public function __wakeup()
+    {
+        $this->uid = $this->generateUid();
+    }
+
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    public function setVehicle(Vehicle $vehicle)
+    {
+        $this->vehicle = $vehicle;
+    }
+
+    private function generateUid()
+    {
+        return uniqid('u_', false);
+    }
+
     public static function getCounter()
     {
         return self::$counter;
+    }
+
+    public static function save(Player $player)
+    {
+        $serialized = serialize($player);
+        $_SESSION['users'][$player->getUid()] = $serialized;
+    }
+
+    public static function reload()
+    {
+        $reloaded = $_SESSION['users'];
+        $players = array();
+
+        foreach($reloaded as $serialized) {
+        $players[] = unserialize($serialized);
+        }
+
+        return $players;
     }
 }
