@@ -1,7 +1,11 @@
 <?php
 namespace Game\Vehicle;
 
+use Game\Util\BonusTrait;
+
 abstract class Vehicle{
+    use BonusTrait;
+    
     const MAX_SPEED = 350;
     const MAX_STATE = 100;
     const POWER = array(
@@ -86,5 +90,4 @@ abstract class Vehicle{
         return $this->speed;
     }
 
-    abstract public function bonus();
 }

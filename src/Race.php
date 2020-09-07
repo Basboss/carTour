@@ -1,9 +1,10 @@
 <?php
 namespace Game;
 
+use Countable;
 use Game\Entity\Track;
 
-class Race{
+class Race implements Countable {
     const MIN_DISTANCE = 100;
     const WEATHER = array(
         'SUNNY' => 1,
@@ -98,5 +99,10 @@ class Race{
             self::WEATHER[ $weather ],
             rand( 5, 15 )
         );
+    }
+
+    public function count()
+    {
+        return $this->countPlayers();
     }
 }

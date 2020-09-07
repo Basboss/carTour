@@ -1,9 +1,12 @@
 <?php
 namespace Game;
 
+use Game\Util\BonusTrait;
 use Game\Vehicle\Vehicle;
 
 final class Player{
+    use BonusTrait;
+
     private $username;
     private $team;
     private $vehicle;
@@ -30,6 +33,11 @@ final class Player{
         self::$counter++;
     }
 
+    public function bonus()
+    {
+        $this->level++;
+    }
+
     public function drive()
     {
         if( $this->vehicle->isStart() ){
@@ -42,9 +50,11 @@ final class Player{
             }
         }else{
             $this->vehicle->start();
-            $this->vehicle->bonus();
             $this->vehicle->increaseSpeed();
         }
+
+        $this->enableBonus();
+        $this->vehicle->enableBonus();
 
         return $this->vehicle->getSpeed();
     }
@@ -103,6 +113,7 @@ final class Player{
     public static function reload()
     {
         $reloaded = $_SESSION['users'];
+        unset($_SESSION['users']);
         $players = array();
 
         foreach($reloaded as $serialized) {
