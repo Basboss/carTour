@@ -1,5 +1,4 @@
 <?php
-
 namespace Game;
 
 final class Player{
@@ -65,5 +64,4 @@ final class Player{
     {
         return self::$counter;
     }
-
 }

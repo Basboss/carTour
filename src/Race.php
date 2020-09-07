@@ -1,6 +1,7 @@
 <?php
-
 namespace Game;
+
+use Game\Entity\Track;
 
 class Race{
     const MIN_DISTANCE = 100;
@@ -87,37 +88,13 @@ class Race{
 
     public static function generate()
     {
-        $tracks = array(
-            array(
-                'name' => 'Monza',
-                'type' => self::TYPE_ROAD,
-                'distance' => 1200,
-            ),
-            array(
-                'name' => 'SPA',
-                'type' => self::TYPE_ROAD,
-                'distance' => 2400,
-            ),
-            array(
-                'name' => 'Tigne Challenge',
-                'type' => self::TYPE_SNOW,
-                'distance' => 1200,
-            ),
-            array(
-                'name' => 'Citadelle Trophy',
-                'type' => self::TYPE_DIRT,
-                'distance' => 1200,
-            ),
-        );
-
-        $trackKey = array_rand( $tracks );
-        $track = $tracks[ $trackKey ];
+        $track = Track::getOneRandom();
 
         $weather = array_rand( self::WEATHER );
         return new Race( 
-            $track['name'], 
-            $track['type'], 
-            $track['distance'], 
+            $track->getName(), 
+            $track->getType(), 
+            $track->getDistance(), 
             self::WEATHER[ $weather ],
             rand( 5, 15 )
         );

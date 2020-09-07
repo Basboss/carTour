@@ -1,10 +1,9 @@
 <?php
-
 require_once 'src/Autoloader.php';
 
 use Game\Autoloader;
-use Game\Player;
 use Game\Race;
+use Game\Player;
 use Game\Vehicle\Car;
 use Game\Vehicle\Truck;
 use Game\Vehicle\Vehicle;
@@ -37,8 +36,6 @@ $randomRace->addPlayer( $jeanJacques );
 $randomRace->addPlayer( $jeanPierre );
 $randomRace->start();
 ?>
-
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">

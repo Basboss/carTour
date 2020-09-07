@@ -1,5 +1,4 @@
 <?php
-
 namespace Game\Vehicle;
 
 abstract class Vehicle{
@@ -17,7 +16,7 @@ abstract class Vehicle{
     protected $power;
 
     private $engine = false;
-    private $state = self::MAX_STATE;
+    protected $state = self::MAX_STATE;
     protected $speed = 0;
 
     public function __construct( $model, $power )
@@ -89,6 +88,3 @@ abstract class Vehicle{
 
     abstract public function bonus();
 }
-
-
-
